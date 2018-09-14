@@ -33,7 +33,6 @@ app.use(bodyParser.urlencoded({
 
 // Set authentication 
 var auth = require('./lib/auth.js')(app, {
-    providers: credentials.authProviders, 
     successRedirect: '/', 
     failureRedirect: '/',
 });
