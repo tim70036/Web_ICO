@@ -3,6 +3,10 @@ var express = require('express');
 var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var credentials = require('./credentials');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var uuid = require('uuid/v4')
+
 
 /////////////////////////////
 // Only for test
@@ -15,6 +19,27 @@ var ssl = { key: privateKey, cert: certificate };
 
 var app = express();
 
+// Set middleware 
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+// Static content 
+app.use("/userpanel", express.static(__dirname + "/public/userpanel")); // for any url that start wih /userpanel (user panel page)
+app.use(express.static(__dirname + '/public/main')); // for other page(main page)
+
+
+app.use(session({
+    genid: (req) => {
+      console.log('Inside the session middleware');
+      return uuid(); // use UUIDs for session IDs
+    },
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }))
 
 
 
@@ -24,12 +49,7 @@ app.set('view engine', 'handlebars');
 
 //app.enable('view cache');
 
-// Set middleware 
-app.use(express.static(__dirname + '/public')); // for static content
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+
 
 // Set authentication 
 var auth = require('./lib/auth.js')(app, {
@@ -57,7 +77,20 @@ app.get('/login', function(req, res) {
 app.get('/signup', function(req, res) {
     res.render('signup-light',  {layout: false} ); // not using layout
 });
+// account page
+app.get('/userpanel/account', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('account',  {layout: false} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
 
+    
+});
 // Set form handling routes
 app.post('/signup', function(req, res) {
     console.log("receive shit");
