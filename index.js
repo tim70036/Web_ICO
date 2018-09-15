@@ -20,7 +20,7 @@ var ssl = { key: privateKey, cert: certificate };
 var app = express();
 
 // Set middleware 
-app.use(cookieParser());
+app.use(cookieParser());   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -77,11 +77,13 @@ app.get('/login', function(req, res) {
 app.get('/signup', function(req, res) {
     res.render('signup-light',  {layout: false} ); // not using layout
 });
-// account page
-app.get('/userpanel/account', function(req, res) {
+
+
+// dashboard page
+app.get('/userpanel/dashboard', function(req, res) {
     if(req.isAuthenticated()) {
         console.log(req.cookies);
-        res.render('account',  {layout: false} ); // not using layout
+        res.render('dashboard', {layout: 'userpanel'} ); // not using layout
     }
     else{
         console.log("not authorized");
@@ -91,6 +93,177 @@ app.get('/userpanel/account', function(req, res) {
 
     
 });
+// kyc page
+app.get('/userpanel/kyc', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('kyc', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// kyc-application page
+app.get('/userpanel/kyc-application', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('kyc-application', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// tokens page
+app.get('/userpanel/tokens', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('tokens', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// transactions page
+app.get('/userpanel/transactions', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('transactions', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// referrals page
+app.get('/userpanel/referrals', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('referrals', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// account page
+app.get('/userpanel/account', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('account', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// security page
+app.get('/userpanel/security', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('security', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// activity page
+app.get('/userpanel/activity', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('activity', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// howto page
+app.get('/userpanel/howto', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('howto', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// faq page
+app.get('/userpanel/faq', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('faq', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+// policy page
+app.get('/userpanel/policy', function(req, res) {
+    if(req.isAuthenticated()) {
+        console.log(req.cookies);
+        res.render('policy', {layout: 'userpanel'} ); // not using layout
+    }
+    else{
+        console.log("not authorized");
+        console.log(req.cookies);
+        res.redirect(303, "/login");
+    }
+
+    
+});
+
+
+// Logout
+app.get('/logout', function(req, res) {
+    
+    // Using only req.logout is not sufficient
+    req.session.destroy((err) => {
+        if(err) return next(err);
+    
+        req.logout();
+    
+        res.redirect(303, '/');
+    });
+
+});
+
+
 // Set form handling routes
 app.post('/signup', function(req, res) {
     console.log("receive shit");
