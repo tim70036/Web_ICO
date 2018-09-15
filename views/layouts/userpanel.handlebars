@@ -43,8 +43,8 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="user-dropdown">
                                 <div class="user-dropdown-head">
-                                    <h6 class="user-dropdown-name">Stefan Harary <span>(IXIA1A105)</span></h6>
-                                    <span class="user-dropdown-email">useremail@example.com</span>
+                                    <h6 class="user-dropdown-name"> {{user.name}} <span>({{user.id}})</span></h6>
+                                    <span class="user-dropdown-email">{{user.email}}/span>
                                 </div>
                                 <div class="user-dropdown-balance">
                                     <h6>ICO TOKEN BALANCE</h6>
@@ -105,8 +105,8 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="user-dropdown">
                                     <div class="user-dropdown-head">
-                                        <h6 class="user-dropdown-name">Stefan Harary <span>(IXIA1A105)</span></h6>
-                                        <span class="user-dropdown-email">useremail@example.com</span>
+                                        <h6 class="user-dropdown-name"> {{user.name}}  <span>({{user.id}})</span></h6>
+                                        <span class="user-dropdown-email">{{user.email}}</span>
                                     </div>
                                     <div class="user-dropdown-balance">
                                         <h6>ICO TOKEN BALANCE</h6>
@@ -145,8 +145,8 @@
                         <div class="user-image">
                             <img src="images/user-thumb-lg.png" alt="thumb">
                         </div>
-                        <h6 class="user-name">Stefan Harary</h6>
-                        <div class="user-uid">Unique ID: <span>IXIA1A105</span></div>
+                        <h6 class="user-name">{{user.name}}</h6>
+                        <div class="user-uid">Unique ID: <span>{{user.id}}</span></div>
                         <ul class="btn-grp guttar-10px">
                             <li><a href="#" class="btn btn-xs btn-warning">Confirm Email</a></li>
                             <li><a href="/userpanel/kyc" class="btn btn-xs btn-warning">KYC Pending</a></li>
