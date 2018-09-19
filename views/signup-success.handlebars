@@ -14,7 +14,7 @@
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" href="assets/css/style.css?ver=100">
 	
-	
+	<meta http-equiv="refresh" content="5;url=/">
 </head>
 
 <body class="user-ath">
@@ -33,8 +33,39 @@
                             <div class="status-icon">
                                 <em class="ti ti-check"></em>
                             </div>
-                            <span class="status-text">Thank you! Your singup process is alomost done.</span>
-                            <p>Please check your mail and verify.</p>
+                            <span class="status-text">Thank you for signing up ! </span>
+                            <span class="status-text"> Please check your mail and verify.</span>
+                            <h5></h5>
+
+
+                            <!-- Count down redirect -->
+                            <p>
+                            Redirecting after <span id="countdown">5</span> seconds...
+                            </p>
+                            <!-- JavaScript part -->
+                            <script type="text/javascript">
+                                
+                                // Total seconds to wait
+                                var seconds = 5;
+                                
+                                function countdown() {
+                                    seconds = seconds - 1;
+                                    if (seconds < 0) {
+                                        // Chnage your redirection link here
+                                        window.location = "/";
+                                    } else {
+                                        // Update remaining seconds
+                                        document.getElementById("countdown").innerHTML = seconds;
+                                        // Count down using javascript
+                                        window.setTimeout("countdown()", 1000);
+                                    }
+                                }
+                                
+                                // Run countdown function
+                                countdown();
+                                
+                            </script>
+
                         </div><!-- .status -->
                     </div>
                     <div class="gaps-2x"></div>

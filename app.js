@@ -5,8 +5,10 @@ const   express = require('express'),
         credentials = require('./credentials'),
         cookieParser = require('cookie-parser'),
         session = require('express-session'),
-        uuid = require('uuid/v4');
+        uuid = require('uuid/v4'),
+        flash = require('connect-flash');
 
+var port = process.env.PORT || 80;
 
 /////////////////////////////
 // Only for test
@@ -25,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(flash());
 
 // Static content 
 app.use("/userpanel", express.static(__dirname + "/public/userpanel")); // for any url that start wih /userpanel (user panel page)
@@ -52,15 +55,15 @@ app.set('view engine', 'handlebars');
 
 
 // Set authentication 
-const auth = require('./lib/auth.js')(app, {
+const auth = require('./lib/auth')(app, {
     successRedirect: '/', 
-    failureRedirect: '/',
+    failureRedirect: '/login',
 });
 auth.init();  // Links in Passport middleware
 auth.registerRoutes(); // Set authentication routes
 
 // Set userpanel pages
-const userpanel = require('./userpanel.js')(app, {
+const userpanel = require('./userpanel')(app, {
     layout : 'userpanel',
 });
 userpanel.registerRoutes();
@@ -69,7 +72,16 @@ userpanel.registerRoutes();
 // Set index page routes
 // index page 
 app.get('/', function(req, res) {
-    res.render('index',  {layout: false} ); // not using layout
+
+    
+    let user = {};
+    if(req.isAuthenticated()) {
+        user = { user : {name : req.user.name, id : req.user.id, email : req.user.email} };
+    }
+
+    let context = {...user};
+    console.log(context);
+    res.render('index',  {layout: false, ...context } ); // not using layout
 });
 // login page
 app.get('/login', function(req, res) {
@@ -100,22 +112,15 @@ app.get('/logout', function(req, res) {
 });
 
 
-// Set form handling routes
-app.post('/signup', function(req, res) {
-    console.log("receive shit");
 
-    // Return to home page
-    res.redirect(303, '/')
-});
-
-
-
-// app.listen(8080);
-// console.log('8080 is the magic port');
+// For deploy 
+// app.listen(port);
+// console.log('Using http at ' + port + ' port');
 
 
 /////////////////////////////
 // Only for test
-https.createServer(ssl, app).listen(8080);
-console.log('Using https at 8080 port for development use...');
+port = 8080;
+https.createServer(ssl, app).listen(port);
+console.log('Using https at ' + port + ' port');
 /////////////////////////////

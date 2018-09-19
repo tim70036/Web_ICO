@@ -58,16 +58,32 @@
                     </li>
                 </ul>
                 <ul class="navbar-btns animated remove-animation" data-animate="fadeInDown" data-delay=".85">
-                    <li class="nav-item lang-switch">
+                    {{!-- <li class="nav-item lang-switch">
                         <a class="" href="#" data-toggle="dropdown">English <em class="ti ti-angle-down"></em></a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">French</a>
                             <a class="dropdown-item" href="#">Chinese</a>
                             <a class="dropdown-item" href="#">Hindi</a>
                         </div>
-                    </li>
-                    <li class="nav-item"><a class="nav-link btn btn-sm btn-outline menu-link" href="/userpanel/account">JOIN PRE-SALE</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-sm btn-outline menu-link" href="/login">TRY ICO</a></li>
+                    </li> --}}
+
+					{{!--  Check user login or not --}}
+					
+					{{#if user}}
+						<li class="nav-item">
+							<a class="nav-link btn btn-sm btn-outline menu-link" href="#" data-toggle="dropdown">Hi,&nbsp&nbsp&nbsp{{user.name}}&nbsp&nbsp&nbsp&nbsp&nbsp<em class="ti ti-angle-down"></em></a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/userpanel/tokens" >Try ICO</a>
+                            	<a class="dropdown-item" href="/userpanel/dashboard">Dashbaord</a>
+                            	<a class="dropdown-item" href="/logout">Logout</a>
+                        	</div>
+						</li>
+					{{else}}
+						<li class="nav-item"><a class="nav-link btn btn-sm btn-outline menu-link" href="/signup">Sign up</a></li>
+                   		<li class="nav-item"><a class="nav-link btn btn-sm btn-outline menu-link" href="/login">Login</a></li>
+					{{/if}}
+
+                    
                 </ul>
             </div>
 		</div>
