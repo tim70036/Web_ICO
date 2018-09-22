@@ -50,8 +50,8 @@
                                 </div><!-- .row -->
                             </div><!-- .payment-list -->
                             <div class="gaps-1x"></div>
-                            <h5 class="user-panel-subtitle">02. Set amount of ICOX tokens you would like to purchase</h5>
-                            <p>To become a part of the ICO Crypto project and purchase of ICOX token will only be possible after payment made and receving an approval.  As you like to participate our project, please select payment method and enter the amount of ICOX tokens you wish to purchase. You can buy ICOX tokens using ETH, BTC, LTC or USD. </p>
+                            <h5 class="user-panel-subtitle">02. Set amount of SC tokens you would like to purchase</h5>
+                            <p>To become a part of the ICO Crypto project and purchase of SC token will only be possible after payment made and receving an approval.  As you like to participate our project, please select payment method and enter the amount of SC tokens you wish to purchase. You can buy SC tokens using ETH, BTC, LTC or USD. </p>
                             <div class="gaps-1x"></div>
                             <div class="row">
                                 <div class="col-md-8">
@@ -59,32 +59,33 @@
                                         <div class="payment-get">
                                             <label for="paymentGet">Tokens to Purchase</label>
                                             <div class="payment-input">
-                                                <input class="input-bordered" type="text" id="paymentGet" value="1200">
-                                                <span class="payment-get-cur payment-cal-cur">icox</span>    
+                                                <input class="input-bordered" type="text" id="paymentGet" value="0">
+                                                <span class="payment-get-cur payment-cal-cur">sc</span>    
                                             </div>
                                         </div>
                                         <em class="ti ti-exchange-vertical"></em>
                                         <div class="payment-from">
                                             <label for="paymentFrom">Payment Amount</label>
                                             <div class="payment-input">
-                                                <input class="input-bordered" type="text" id="paymentFrom" value="600">
-                                                <span class="payment-from-cur payment-cal-cur">usd</span>    
+                                                <input class="input-bordered" type="text" id="paymentFrom" value="0">
+                                                <span class="payment-from-cur payment-cal-cur paymentCurrency">eth</span>    
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="gaps-2x d-md-none"></div>
                                 </div><!-- .col -->
                                 <div class="col-md-4">
                                     <div class="payment-bonus">
                                         <h6 class="payment-bonus-title">Current Bonus</h6>
-                                        <span class="payment-bonus-amount">20% <span>on pre-sales</span></span>
+                                        <span class="payment-bonus-amount">0% <span>on pre-sales</span></span>
                                         <span class="payment-bonus-time">End at - 09 Jul, 2018</span>
                                     </div>
                                     <div class="gaps-1x d-md-none"></div>
                                 </div><!-- .col -->
                             </div><!-- .row -->
                             <div class="gaps-1x"></div>
-                            <div class="payment-calculator-note"><i class="fas fa-info-circle"></i>The calculator helps you to convert required currency to ICOX tokens.</div>
+                            <div class="payment-calculator-note"><i class="fas fa-info-circle"></i>The calculator helps you to convert required currency to SC tokens.</div>
                             <div class="gaps-3x"></div>
                             <div class="payment-summary">
                                 <div class="row">
@@ -92,7 +93,7 @@
                                         <div class="payment-summary-item payment-summary-final">
                                             <h6 class="payment-summary-title">Final Payment</h6>
                                             <div class="payment-summary-info">
-                                                <span class="payment-summary-amount">600.00</span> <span>usd</span>
+                                                <span class="payment-summary-amount" id="paymentFromSum">0</span> <span class="paymentCurrency">eth</span>
                                             </div>
                                         </div>
                                     </div><!-- .col -->
@@ -100,7 +101,7 @@
                                         <div class="payment-summary-item payment-summary-bonus">
                                             <h6 class="payment-summary-title">Received Bonus</h6>
                                             <div class="payment-summary-info">
-                                                <span>+</span> <span class="payment-summary-amount">600.00</span> <span>icox</span>
+                                                <span>+</span> <span class="payment-summary-amount">0</span> <span>sc</span>
                                             </div>
                                         </div>
                                     </div><!-- .col -->
@@ -108,12 +109,13 @@
                                         <div class="payment-summary-item payment-summary-tokens">
                                             <h6 class="payment-summary-title">Tokens Received</h6>
                                             <div class="payment-summary-info">
-                                                <span class="payment-summary-amount">12,200</span> <span>icox</span>
+                                                <span class="payment-summary-amount paymentGetSum">0</span> <span>sc</span>
                                             </div>
                                         </div>
                                     </div><!-- .col -->
                                 </div><!-- .row -->
                             </div><!-- .payment-summary -->
+    
                             <a href="#" class="btn btn-primary payment-btn" data-toggle="modal" data-target="#tranxETH">Purchase Tokens</a>
                         </form><!-- form -->
                     </div><!-- .user-panel -->
@@ -126,7 +128,7 @@
                 <div class="tranx-popup">
                     <h5>Purchase Details ETH</h5>
                     <div class="tranx-payment-details">
-                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 ICOX</strong> tokens (incl. bonus of 450 ICOX) once paid.</p>
+                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong><span class="paymentGetSum">0</span>  SC</strong> tokens (incl. bonus of <span>0</span> SC) once paid.</p>
                         <h6>Please make your Payment to the bellow Address</h6>
                         <div class="tranx-payment-info">
                             <span class="tranx-copy-feedback copy-feedback"></span>
@@ -158,7 +160,7 @@
                                 <div class="gaps-1x"></div>
                                 <div class="note note-danger">
                                     <em class="fas fa-info-circle"></em>
-                                    <p>In case you send a different amount ETH, the number of ICOX tokens will update accordingly.</p>
+                                    <p>In case you send a different amount ETH, the number of SC tokens will update accordingly.</p>
                                 </div>
                             </div><!-- .col -->
                         </div><!-- .row -->
@@ -176,7 +178,7 @@
                 <div class="tranx-popup">
                     <h5>Purchase Details LTC</h5>
                     <div class="tranx-payment-details">
-                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 ICOX</strong> tokens (incl. bonus of 450 ICOX) once paid.</p>
+                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 SC</strong> tokens (incl. bonus of 450 SC) once paid.</p>
                         <h6>Please make your Payment to the bellow Address</h6>
                         <div class="tranx-payment-info">
                             <span class="tranx-copy-feedback copy-feedback"></span>
@@ -205,7 +207,7 @@
                                 <div class="gaps-1x"></div>
                                 <div class="note note-danger">
                                     <em class="fas fa-info-circle"></em>
-                                    <p>In case you send a different amount ETH, the number of ICOX tokens will update accordingly.</p>
+                                    <p>In case you send a different amount ETH, the number of SC tokens will update accordingly.</p>
                                 </div>
                             </div><!-- .col -->
                         </div><!-- .row -->
@@ -223,7 +225,7 @@
                 <div class="tranx-popup">
                     <h5>Purchase Details BTC</h5>
                     <div class="tranx-payment-details">
-                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 ICOX</strong> tokens (incl. bonus of 450 ICOX) once paid.</p>
+                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 SC</strong> tokens (incl. bonus of 450 SC) once paid.</p>
                         <h6>Please make your Payment to the bellow Address</h6>
                         <div class="tranx-payment-info">
                             <span class="tranx-copy-feedback copy-feedback"></span>
@@ -252,7 +254,7 @@
                                 <div class="gaps-1x"></div>
                                 <div class="note note-danger">
                                     <em class="fas fa-info-circle"></em>
-                                    <p>In case you send a different amount ETH, the number of ICOX tokens will update accordingly.</p>
+                                    <p>In case you send a different amount ETH, the number of SC tokens will update accordingly.</p>
                                 </div>
                             </div><!-- .col -->
                         </div><!-- .row -->
@@ -270,7 +272,7 @@
                 <div class="tranx-popup">
                     <h5>Purchase Details USD</h5>
                     <div class="tranx-payment-details">
-                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 ICOX</strong> tokens (incl. bonus of 450 ICOX) once paid.</p>
+                        <p>Hi, Your transaction <strong>ICIYOW0102</strong> is <strong>Pending Payment</strong><br> You will receive <strong>5,470 SC</strong> tokens (incl. bonus of 450 SC) once paid.</p>
                         <h6>Please make your Payment with your credit card</h6>
                         <form action="#">
                             <div class="input-item input-with-label">
@@ -335,4 +337,67 @@
         </div><!-- .modal-dialog -->
     </div>
     <!-- Modal End -->
+    
+    <!-- Smart Contract Script -->
+    <script src="assets/eth/token.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('.pay-done').click(function(){
+                // Purchase token
+                var paymentNum = $('#paymentFrom').val();
+                purchaseToken(paymentNum);
+            });
+
+            // Set displayed payment address
+            var contractAddr = '0xd45b2db8706e0102a91609ae600bc9ed3c443b2d';
+            $('.tranx-payment-address').val(contractAddr);
+        });
+    </script>
+
+    <!-- Payment Calculator Script -->
+    <script>
+        $(document).ready(function(){
+
+            var rate = 10;
+
+            // Token num change 
+            $('#paymentGet').change(function(){
+                                                
+                var num = $('#paymentGet').val();
+                var amount =  num / rate;
+
+                $('.paymentGetSum').html(num);
+                $('#paymentFrom').val(amount);
+                $('#paymentFromSum').html(amount);
+            });
+
+            // Payment num change 
+            $('#paymentFrom').change(function(){
+
+                var num = $('#paymentFrom').val();
+                var amount =  num*rate;
+
+                $('#paymentFromSum').html(num);
+                $('#paymentGet').val(amount);
+                $('.paymentGetSum').html(amount);
+            });
+
+            // Payment type change
+            $('input[type=radio][name=payOption]').change(function() {
+                if (this.value == 'tranxETH') {
+                    $('.paymentCurrency').html('eth');
+                }
+                else if (this.value == 'tranxLTC') {
+                    $('.paymentCurrency').html('ltc');
+                }
+                else if (this.value == 'tranxBTC') {
+                    $('.paymentCurrency').html('btc');
+                }
+                else if (this.value == 'tranxUSD') {
+                    $('.paymentCurrency').html('usd');
+                }
+            });
+        });
+    </script>
     
