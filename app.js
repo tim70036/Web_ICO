@@ -6,9 +6,11 @@ const   express = require('express'),
         cookieParser = require('cookie-parser'),
         session = require('express-session'),
         uuid = require('uuid/v4'),
-        flash = require('connect-flash');
+        flash = require('connect-flash'),
+        connection = require('./lib/dbConnection');
 
 var port = process.env.PORT || 80;
+
 
 /////////////////////////////
 // Only for test
@@ -92,7 +94,11 @@ app.get('/signup', function(req, res) {
     res.render('signup-light',  {layout: false} ); // not using layout
 });
 
-
+app.get('/recovery', function(req, res){
+    let recovery = {recovery: true};
+    let context = {...recovery};
+    res.render('recovery', {layout: false, ...context});
+});
 
 
 
@@ -117,10 +123,9 @@ app.get('/logout', function(req, res) {
 // app.listen(port);
 // console.log('Using http at ' + port + ' port');
 
-
 /////////////////////////////
 // Only for test
-port = 8080;
-https.createServer(ssl, app).listen(port);
-console.log('Using https at ' + port + ' port');
+ port = 8080;
+ https.createServer(ssl, app).listen(port);
+ console.log('Using https at ' + port + ' port');
 /////////////////////////////
