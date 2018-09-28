@@ -15,7 +15,7 @@
 	$win.on('resize', function () { 
 		wwCurrent = winwidth(); 
 	});
-
+    
 	// Sticky
 	var $is_sticky = $('.is-sticky');
 	if ($is_sticky.length > 0 ) {

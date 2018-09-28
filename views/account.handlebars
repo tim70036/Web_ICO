@@ -1,4 +1,43 @@
 
+<script>
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    $(document).ready(function(){
+        $('#newPwd, #repeatedPwd').on('keyup', function(){
+          $('#err-msg').remove();
+          if ($('#newPwd').val() == $('#repeatedPwd').val()) {
+            $('#message').html('Matching').css('color', 'green');
+          } else 
+            $('#message').html('Not Matching').css('color', 'red');
+        });
+
+        var tab = getUrlVars()["tab"];
+        console.log(tab);
+        var page = ["#personal-data", "#wallet-address", "#change-password", "notification"];
+        var pageBtn = ["#personal-data-btn", "#wallet-address-btn", "#change-password-btn", "notification-btn"];
+
+        if(tab != undefined){
+            $(page[tab-1]).addClass('active show');
+            $(pageBtn[tab-1]).addClass('active');
+            $(page[0]).removeClass('active show');
+            $(pageBtn[0]).removeClass('active');
+
+        }
+    });
+
+</script>
+
                 <div class="user-content">
                     <div class="user-panel">
                         <h2 class="user-panel-title">Account Information</h2>
@@ -8,13 +47,16 @@
                         </div><!-- .alert-box -->
                         <ul class="nav nav-tabs nav-tabs-line" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#personal-data">Personal Data</a>
+                                <a class="nav-link active" id="personal-data-btn" data-toggle="tab" href="#personal-data">Personal Data</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#wallet-address">Wallet Address</a>
+                                <a class="nav-link" id="wallet-address-btn" data-toggle="tab" href="#wallet-address">Wallet Address</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#notification">Notification</a>
+                                <a class="nav-link" id="change-password-btn" data-toggle="tab" href="#change-password">Change Password</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="notification-btn" data-toggle="tab" href="#notification">Notification</a>
                             </li>
                         </ul><!-- .nav-tabs-line -->
                         <div class="tab-content" id="myTabContent">
@@ -96,6 +138,34 @@
                                         <button class="btn btn-primary">Update</button>
                                         <div class="gaps-2x d-sm-none"></div>
                                         <span class="color-success"><em class="ti ti-check-box"></em> Saved your wallet address</span>
+                                    </div>
+                                </form><!-- form -->
+                            </div><!-- .tab-pane -->
+                            <div class="tab-pane fade show active" id="change-password">
+                                <form action="/process/changepwd" method="POST">
+                                    <div class="input-item input-with-label">
+                                        <label for="old=password" class="input-item-label">Old Password</label>
+                                        <input class="input-bordered" type="password" name="oldPassword" required>
+                                    </div><!-- .input-item -->
+                                    <div class="input-item input-with-label">
+                                        <label for="new-password" class="input-item-label">New Password</label>
+                                        <input class="input-bordered" type="password" id="newPwd" name="newPassword" required>
+                                    </div><!-- .input-item -->
+                                    <div class="input-item input-with-label">
+                                        <label for="repeat-password" class="input-item-label">Repeat Password</label>
+                                        <input class="input-bordered" type="password" id="repeatedPwd" name="repeatedPassword" required>
+                                        {{#if tab}}
+                                            <span id="err-msg" style="color: red">Change password failed!</span>
+                                        {{/if}}
+                                        <span id="message"></span>
+                                    </div><!-- .input-item -->
+                                    
+                                    
+                                    <div class="gaps-1x"></div><!-- 10px gap -->
+                                    <div class="d-sm-flex justify-content-between align-items-center">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <div class="gaps-2x d-sm-none"></div>
+                                        <span class="color-success"><em class="ti ti-check-box"></em> All Changes are saved</span>
                                     </div>
                                 </form><!-- form -->
                             </div><!-- .tab-pane -->

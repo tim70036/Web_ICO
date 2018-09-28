@@ -47,6 +47,9 @@
                             </div>
                             <div class="input-item">
                                 <input name="password" type="password" placeholder="Password" class="input-line-simple" required>
+                                {{#if invalid}}
+                                    <span style="color: red">Invalid email or password!</span>
+                                {{/if}}
                             </div>
                             <div class="gaps"></div>
                             <div class="d-flex justify-content-between align-items-center">
@@ -57,8 +60,14 @@
                     </div>
                     <div class="gaps size-2x"></div>
                     <div class="form-note">
-                        Not a member? <a href="/signup">Sign up now</a>
+                        Not a member? &nbsp&nbsp&nbsp&nbsp&nbsp<a href="/signup">Sign up now</a>
                     </div>
+                    <div class="form-note">
+                        Already signed up but can't login?&nbsp&nbsp&nbsp<a href="/verify">Verify Email</a>
+                    </div>
+                    <!--<div class="form-note">
+                        Not a member? <a href="/signup">Sign up now</a>
+                    </div>-->
                 </div>
             </div>
         </div>

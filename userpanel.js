@@ -1,6 +1,20 @@
 
+// Produce user data for templating
 function userContext(req) {
     return { user : {name : req.user.name, id : req.user.id, email : req.user.email} };
+}
+
+// Function for checking each request
+function authorize(req, res, next) {
+    // User not login, just redirect
+    if(!req.isAuthenticated()) {
+        console.log("not authorized");
+        res.redirect(303, "/login");
+        return;
+    }
+
+    // User has logined, moving forward
+    return next();
 }
 
 module.exports = function(app, options) {
@@ -12,14 +26,8 @@ module.exports = function(app, options) {
         registerRoutes : function() {
             
             // dashboard page
-            app.get('/userpanel/dashboard', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-    
+            app.get('/userpanel/dashboard', authorize, function(req, res) {
+
                  // Get user data from Passport
                  let user = userContext(req);
 
@@ -30,13 +38,7 @@ module.exports = function(app, options) {
                  res.render('dashboard',  { ...userLayout, ...context } );
             });
             // kyc page
-            app.get('/userpanel/kyc', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
+            app.get('/userpanel/kyc', authorize, function(req, res) {
     
                 // Get user data from Passport
                 let user = userContext(req);
@@ -49,13 +51,7 @@ module.exports = function(app, options) {
     
             });
             // kyc-application page
-            app.get('/userpanel/kyc-application', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
+            app.get('/userpanel/kyc-application', authorize, function(req, res) {
     
                  // Get user data from Passport
                  let user = userContext(req);
@@ -69,14 +65,8 @@ module.exports = function(app, options) {
                 
             });
             // tokens page
-            app.get('/userpanel/tokens', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-    
+            app.get('/userpanel/tokens', authorize, function(req, res) {
+
                 // Get user data from Passport
                 let user = userContext(req);
 
@@ -89,14 +79,8 @@ module.exports = function(app, options) {
                 
             });
             // transactions page
-            app.get('/userpanel/transactions', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-    
+            app.get('/userpanel/transactions', authorize, function(req, res) {
+
                 // Get user data from Passport
                 let user = userContext(req);
 
@@ -108,13 +92,7 @@ module.exports = function(app, options) {
     
             });
             // referrals page
-            app.get('/userpanel/referrals', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
+            app.get('/userpanel/referrals', authorize, function(req, res) {
                 
                 // Get user data from Passport
                 let user = userContext(req);
@@ -128,36 +106,27 @@ module.exports = function(app, options) {
                 
             });
             // account page
-            app.get('/userpanel/account', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-                
-                
-                // Get user data from Passport
-                let user = userContext(req);
+            app.get('/userpanel/account', authorize, function(req, res) {
+               
+                 // Get user data from Passport
+                 let user = userContext(req);
 
-                // Collect all dynamic data for view
-                let context = { ...user };
-
-                // Render 
-                res.render('account',  { ...userLayout, ...context } );
+                 // Collect all dynamic data for view
+                 let context = { ...user };
+ 
+                 if(req.query.tab){
+                     var tab = {tab: req.query.tab};
+                     var page = {...tab};
+                     res.render('account',  { ...userLayout, ...context, ...page } );
+                 }else{
+                     res.render('account',  { ...userLayout, ...context} );
+                 }    
     
                 
             });
             // security page
-            app.get('/userpanel/security', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-                
-                
+            app.get('/userpanel/security', authorize, function(req, res) {
+     
                 // Get user data from Passport
                 let user = userContext(req);
 
@@ -170,15 +139,8 @@ module.exports = function(app, options) {
                 
             });
             // activity page
-            app.get('/userpanel/activity', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-                
-                
+            app.get('/userpanel/activity', authorize, function(req, res) {
+       
                 // Get user data from Passport
                 let user = userContext(req);
 
@@ -191,15 +153,8 @@ module.exports = function(app, options) {
                 
             });
             // howto page
-            app.get('/userpanel/howto', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-                
-                
+            app.get('/userpanel/howto', authorize, function(req, res) {
+
                 // Get user data from Passport
                 let user = userContext(req);
 
@@ -212,14 +167,8 @@ module.exports = function(app, options) {
                 
             });
             // faq page
-            app.get('/userpanel/faq', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-                
+            app.get('/userpanel/faq', authorize, function(req, res) {
+             
                 // Get user data from Passport
                 let user = userContext(req);
 
@@ -232,15 +181,8 @@ module.exports = function(app, options) {
                 
             });
             // policy page
-            app.get('/userpanel/policy', function(req, res) {
-                if(!req.isAuthenticated()) {
-                    console.log("not authorized");
-                    console.log(req.cookies);
-                    res.redirect(303, "/login");
-                    return;
-                }
-                
-                
+            app.get('/userpanel/policy', authorize, function(req, res) {
+          
                 // Get user data from Passport
                 let user = userContext(req);
 

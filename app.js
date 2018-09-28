@@ -59,7 +59,7 @@ app.set('view engine', 'handlebars');
 // Set authentication 
 const auth = require('./lib/auth')(app, {
     successRedirect: '/', 
-    failureRedirect: '/login',
+    failureRedirect: '/login'
 });
 auth.init();  // Links in Passport middleware
 auth.registerRoutes(); // Set authentication routes
@@ -87,7 +87,14 @@ app.get('/', function(req, res) {
 });
 // login page
 app.get('/login', function(req, res) {
-    res.render('login-light',  {layout: false} ); // not using layout
+    if(req.query.valid){
+        var loginInfo = {invalid: true};
+        var context = {...loginInfo};
+        res.render('login-light', {layout: false, ...context});
+    }else{
+        res.render('login-light',  {layout: false} ); // not using layout
+    }
+    
 });
 // signup page
 app.get('/signup', function(req, res) {
@@ -98,6 +105,12 @@ app.get('/recovery', function(req, res){
     let recovery = {recovery: true};
     let context = {...recovery};
     res.render('recovery', {layout: false, ...context});
+});
+
+app.get('/verify', function(req, res){
+    let verify = {verify: true};
+    let context = {...verify};
+    res.render('verify', {layout: false, ...context});
 });
 
 
@@ -119,9 +132,10 @@ app.get('/logout', function(req, res) {
 
 
 
+
 // For deploy 
-// app.listen(port);
-// console.log('Using http at ' + port + ' port');
+//app.listen(port);
+//console.log('Using http at ' + port + ' port');
 
 /////////////////////////////
 // Only for test
